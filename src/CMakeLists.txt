@@ -4,6 +4,8 @@ project(gnoproj C CXX)
 
 set(CMAKE_CXX_COMPILER g++)
 
+set(CMAKE_BUILD_TYPE Release)
+
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR
     "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     set(warnings "-Wall -Wextra -Werror")

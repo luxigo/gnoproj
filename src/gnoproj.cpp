@@ -39,7 +39,8 @@
 
 #include "gnoproj.hpp"
 
-
+using namespace std;
+using namespace cv;
 using namespace elphelphg;
 
 int main(int argc, char** argv) {

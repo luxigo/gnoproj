@@ -62,7 +62,4 @@
 
 #define DEBUG 0
 
-using namespace std;
-using namespace cv;
-
 #endif /* GNOPROJ_HPP_ */

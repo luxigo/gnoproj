@@ -1,0 +1,6 @@
+[submodule "lib/lib3dreconstruct"]
+	path = lib/lib3dreconstruct
+	url = https://github.com/FoxelSA/lib3dreconstruct.git
+[submodule "lib/libgnomonic"]
+	path = lib/libgnomonic
+	url = https://github.com/FoxelSA/libgnomonic.git

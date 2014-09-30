@@ -61,11 +61,13 @@ int main(int argc, char** argv) {
      cout.setf(ios::scientific);
 
     try {
-      CameraArray e4pi(CameraArray::EYESIS4PI_CAMERA,imagej_prefs_xml);
 
+      // get channel number from file name
       struct utils::imagefile_info *info=utils::imagefile_parsename(input_image_filename);
-      
       int channel_index=atoi(info->channel);
+
+      // accessing calibration data
+      CameraArray e4pi(CameraArray::EYESIS4PI_CAMERA,imagej_prefs_xml);
       Channel *channel=e4pi.channel(channel_index);
       EqrData *eqr=channel->eqr;
       SensorData *sensor=channel->sensor;
@@ -105,7 +107,8 @@ int main(int argc, char** argv) {
           sensor->focalLength,
           li_bilinearf
       );
-      
+     
+      // generate output file name
       if (!output_image_filename.length()) {
         output_image_filename+=std::string(info->dir)+"/"+info->timestamp+"-"+info->channel+"-"+info->attributes+"_GNO."+info->extension;
       }
@@ -123,4 +126,6 @@ int main(int argc, char** argv) {
       std::cerr << "unhandled exception\n";
       return 1;
     }
+
+    return 0;
 }

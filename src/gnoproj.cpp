@@ -72,14 +72,11 @@ int main(int argc, char** argv) {
 
       // load image
       printf("load image\n");
-      IplImage * eqr_img = NULL;
-      eqr_img  = cvLoadImage(input_image_filename, CV_LOAD_IMAGE_COLOR );
-     
+      IplImage* eqr_img = cvLoadImage(input_image_filename, CV_LOAD_IMAGE_COLOR );
       printf("done\n");
 
        /* Initialize output image structure */
-       IplImage * out_img = NULL;
-       out_img = cvCreateImage( cvSize( channel->sensor->pixelCorrectionWidth, channel->sensor->pixelCorrectionHeight ), IPL_DEPTH_8U , eqr_img->nChannels );
+       IplImage* out_img = cvCreateImage( cvSize( channel->sensor->pixelCorrectionWidth, channel->sensor->pixelCorrectionHeight ), IPL_DEPTH_8U , eqr_img->nChannels );
 
       /* Gnomonic projection of the equirectangular tile */
       lg_ttg_uc(
@@ -88,7 +85,7 @@ int main(int argc, char** argv) {
           eqr_img->width, 
           eqr_img->height, 
           eqr_img->nChannels, 
-          ( inter_C8_t *) out_img->imageData, 
+          ( inter_C8_t *) out_img->imageData,
           out_img->width, 
           out_img->height,
           out_img->nChannels,
@@ -110,7 +107,7 @@ int main(int argc, char** argv) {
       );
       
       if (!output_image_filename.length()) {
-        output_image_filename+=std::string(info->dir)+"/"+info->timestamp+"-"+info->channel+"-"+info->attributes+"_GNO"+info->extension;
+        output_image_filename+=std::string(info->dir)+"/"+info->timestamp+"-"+info->channel+"-"+info->attributes+"_GNO."+info->extension;
       }
 
       /* Gnomonic image exportation */

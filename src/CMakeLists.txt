@@ -4,7 +4,7 @@ project(gnoproj C CXX)
 
 set(CMAKE_CXX_COMPILER g++)
 
-set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_BUILD_TYPE Debug)
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" OR
     "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
@@ -36,6 +36,16 @@ find_library(LIBELPHELPHG_LIBRARY NAMES elphelphg libelphelphg
 
 # opencv
 find_package(OpenCV REQUIRED)
+
+# libtiff                
+pkg_check_modules(PC_LIBTIFF QUIET libtiff)
+set(LIBTIFF_DEFINITIONS ${PC_LIBTIFF_CFLAGS_OTHER})
+                         
+find_path(LIBTIFF_INCLUDE_DIR tiff.h
+  HINTS ${PC_LIBTIFF_INCLUDEDIR} ${PC_LIBTIFF_INCLUDE_DIRS}
+  PATH_SUFFIXES libtiff )                                                                                                                                     
+find_library(LIBTIFF_LIBRARY NAMES tiff libtiff
+  HINTS ${PC_LIBTIFF_LIBDIR} ${PC_LIBTIFF_LIBRARY_DIRS} )
 
 # libxml2
 pkg_check_modules(PC_LIBXML QUIET libxml-2.0)
@@ -95,7 +105,7 @@ include_directories(
   ${LIBGNOMONIC_INCLUDE_DIR}  
   ${LIBINTER_INCLUDE_DIR}  
   ${LIBBOOST_INCLUDE_DIR}
-  #  ${LIBTIFF_INCLUDE_DIR}
+  ${LIBTIFF_INCLUDE_DIR}
 )
 
 # libraries
@@ -110,7 +120,7 @@ set(GNOPROJ_LIBRARY_LIST
   ${LIBBOOST_FILESYSTEM_LIBRARY}
   ${LIBBOOST_REGEX_LIBRARY}
   ${LIBINTER_LIBS}
- #  ${LIBTIFF_LIBRARY}
+  ${LIBTIFF_LIBRARY}
  #  ${CMAKE_THREAD_LIBS_INIT}
 )
 # build gnoproj
